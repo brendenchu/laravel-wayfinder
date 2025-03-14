@@ -1,0 +1,45 @@
+{
+    "name": "brendenchu/laravel-wayfinder",
+    "description": "A package for efficient management of search operations in your Laravel application.",
+    "keywords": ["laravel", "search", "eloquent", "model", "searchable", "query", "wayfinder"],
+    "type": "laravel-package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Brenden Chu",
+            "email": "brenden@wavy.dev"
+        }
+    ],
+    "require": {
+        "php": "^7.3|^8.0",
+        "illuminate/support": "^8.0",
+        "illuminate/database": "^8.0",
+        "illuminate/http": "^8.0",
+        "illuminate/validation": "^8.0",
+        "illuminate/view": "^8.0",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Brendenchu\\Wayfinder\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Brendenchu\\Wayfinder\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Brendenchu\\Wayfinder\\WayfinderServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

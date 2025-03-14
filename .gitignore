@@ -1,0 +1,13 @@
+/vendor
+composer.phar
+composer.lock
+.DS_Store
+Thumbs.db
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
+.phpactor.json
+.phpunit.result.cache
+.php-cs-fixer.cache
