@@ -1,6 +1,6 @@
 {
     "name": "brendenchu/laravel-wayfinder",
-    "description": "A package for efficient management of search operations in your Laravel application.",
+    "description": "A package for convenient search capabilities in your Laravel application.",
     "keywords": ["laravel", "search", "eloquent", "model", "searchable", "query", "wayfinder"],
     "type": "laravel-package",
     "license": "MIT",
