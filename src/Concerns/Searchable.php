@@ -4,7 +4,7 @@ namespace Brendenchu\Wayfinder\Concerns;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 
-trait HasSearchable
+trait Searchable
 {
     /**
      * Returns the search configuration for this searchable class.

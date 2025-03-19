@@ -3,7 +3,7 @@
 namespace Brendenchu\Wayfinder\Http\Requests;
 
 use Brendenchu\Wayfinder\Facades\Wayfinder;
-use Brendenchu\Wayfinder\Support\Searchable;
+use Brendenchu\Wayfinder\Support\SearchConfig;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -15,7 +15,7 @@ class SearchRequest extends FormRequest
      *
      * @var string
      */
-    protected $searchableClass;
+    protected string $searchableClass;
 
     /**
      * Get the validation rules that apply to the request.
@@ -34,7 +34,7 @@ class SearchRequest extends FormRequest
         $rules = [];
 
         // Generate rules based on allowed params and field types
-        foreach ($config->allowedParams as $param) {
+        foreach ($config->allowedParams as $param => $attributes) {
             $rules[$param] = $this->generateRulesForField($param, $config);
         }
 
@@ -44,7 +44,7 @@ class SearchRequest extends FormRequest
     /**
      * Determine which searchable class is being searched
      */
-    protected function determineSearchableClass()
+    protected function determineSearchableClass(): void
     {
         $searchableName = $this->route('searchable') ?? config('wayfinder.default_searchable');
 
@@ -60,10 +60,10 @@ class SearchRequest extends FormRequest
      * Generate validation rules for a specific field
      *
      * @param string $field
-     * @param Searchable $config
+     * @param SearchConfig $config
      * @return array
      */
-    protected function generateRulesForField(string $field, Searchable $config): array
+    protected function generateRulesForField(string $field, SearchConfig $config): array
     {
         $rules = ['nullable'];
 
@@ -140,7 +140,7 @@ class SearchRequest extends FormRequest
         }
 
         $config = Wayfinder::config($this->searchableClass);
-        return $this->only($config->allowedParams);
+        return $this->only(array_keys($config->allowedParams));
     }
 
     /**

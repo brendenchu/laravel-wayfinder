@@ -14,7 +14,7 @@ class WayfinderServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         // Merge config
         $this->mergeConfigFrom(
@@ -74,7 +74,7 @@ class WayfinderServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         // Load routes
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
@@ -94,12 +94,12 @@ class WayfinderServiceProvider extends ServiceProvider
 
         // Publish controllers
         $this->publishes([
-            __DIR__ . '/Controllers/SearchController.php' => app_path('Http/Controllers/Vendor/Wayfinder/SearchController.php'),
+            __DIR__ . '/Http/Controllers/SearchController.php' => app_path('Http/Controllers/Vendor/Wayfinder/SearchController.php'),
         ], 'wayfinder-controllers');
 
         // Publish request classes
         $this->publishes([
-            __DIR__ . '/Requests/SearchRequest.php' => app_path('Http/Requests/Vendor/Wayfinder/SearchRequest.php'),
+            __DIR__ . '/Http/Requests/SearchRequest.php' => app_path('Http/Requests/Vendor/Wayfinder/SearchRequest.php'),
         ], 'wayfinder-requests');
 
         // Publish everything at once

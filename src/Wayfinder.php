@@ -3,7 +3,7 @@
 namespace Brendenchu\Wayfinder;
 
 use Brendenchu\Wayfinder\Contracts\WithSearchable;
-use Brendenchu\Wayfinder\Support\Searchable;
+use Brendenchu\Wayfinder\Support\SearchConfig;
 use Brendenchu\Wayfinder\Support\SearchResponse;
 use Closure;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -30,7 +30,7 @@ class Wayfinder
 
         $config = $this->config($searchableClass);
 
-        $allowedParams = array_intersect_key($params, array_flip($config->allowedParams));
+        $allowedParams = array_intersect_key($params, array_flip(array_keys($config->allowedParams)));
         $query = $searchableClass::query();
 
         if ($callback === null) {
@@ -55,15 +55,15 @@ class Wayfinder
      * Get the search configuration for a searchable class.
      *
      * @param string $searchableClass
-     * @return Searchable
+     * @return SearchConfig
      * @throws InvalidArgumentException
      */
-    public function config(string $searchableClass): Searchable
+    public function config(string $searchableClass): SearchConfig
     {
         if (!$this->canSearch($searchableClass)) {
             throw new InvalidArgumentException("Class {$searchableClass} does not implement WithSearchable interface");
         }
-        return Searchable::fromClass(new $searchableClass);
+        return SearchConfig::fromClass(new $searchableClass);
     }
 
     /**

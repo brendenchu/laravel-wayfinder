@@ -4,49 +4,49 @@ namespace Brendenchu\Wayfinder\Support;
 
 use Brendenchu\Wayfinder\Contracts\WithSearchable;
 
-class Searchable
+class SearchConfig
 {
     /**
      * Allowed search parameters
      *
      * @var array
      */
-    public $allowedParams;
+    public array $allowedParams;
 
     /**
      * Option fields for the search form
      *
      * @var array|null
      */
-    public $optionFields;
+    public ?array $optionFields;
 
     /**
      * Validation rules for search parameters
      *
      * @var array|null
      */
-    public $validationRules;
+    public ?array $validationRules;
 
     /**
      * Validation messages for search parameters
      *
      * @var array|null
      */
-    public $validationMessages;
+    public ?array $validationMessages;
 
     /**
      * Validation attributes for search parameters
      *
      * @var array|null
      */
-    public $validationAttributes;
+    public ?array $validationAttributes;
 
     /**
      * View to render search results
      *
      * @var string|null
      */
-    public $view;
+    public ?string $view;
 
     /**
      * Create a new Searchable instance
@@ -158,22 +158,15 @@ class Searchable
      */
     public function __get(string $name)
     {
-        switch ($name) {
-            case 'allowedParams':
-                return $this->allowedParams;
-            case 'optionFields':
-                return $this->optionFields;
-            case 'validationRules':
-                return $this->validationRules;
-            case 'validationMessages':
-                return $this->validationMessages;
-            case 'validationAttributes':
-                return $this->validationAttributes;
-            case 'view':
-                return $this->view;
-            default:
-                return null;
-        }
+        return match ($name) {
+            'allowedParams' => $this->allowedParams,
+            'optionFields' => $this->optionFields,
+            'validationRules' => $this->validationRules,
+            'validationMessages' => $this->validationMessages,
+            'validationAttributes' => $this->validationAttributes,
+            'view' => $this->view,
+            default => null,
+        };
     }
 
     /**

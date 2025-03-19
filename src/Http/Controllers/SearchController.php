@@ -20,7 +20,9 @@ class SearchController extends Controller
     public function __invoke(SearchRequest $request, string $searchable = null): View
     {
         // Get searchable class from config
-        $searchable = $searchable ?? config('wayfinder.default_searchable');
+        $searchable = $searchable ??
+            config('wayfinder.default_searchable') ??
+            config('wayfinder.searchables')[0] ?? null;
         $searchableClass = config("wayfinder.searchables.{$searchable}");
 
         if (!$searchableClass || !Wayfinder::canSearch($searchableClass)) {

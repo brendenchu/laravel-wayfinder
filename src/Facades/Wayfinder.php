@@ -2,14 +2,14 @@
 
 namespace Brendenchu\Wayfinder\Facades;
 
-use Brendenchu\Wayfinder\Support\Searchable;
+use Brendenchu\Wayfinder\Support\SearchConfig;
 use Brendenchu\Wayfinder\Support\SearchResponse;
 use Closure;
 use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static SearchResponse search(array $params, string $searchableClass, ?Closure $callback = null)
- * @method static Searchable config(string $searchableClass)
+ * @method static SearchConfig config(string $searchableClass)
  * @method static bool canSearch(string $searchableClass)
  * @method static array searchables()
  * @method static string url(string $searchableClass, array $params = [])

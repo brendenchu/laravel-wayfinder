@@ -13,30 +13,30 @@ class SearchResponse
      *
      * @var array
      */
-    protected $params;
+    protected array $params;
 
     /**
      * The search results (can be paginated or collection)
      *
      * @var mixed
      */
-    protected $results;
+    protected mixed $results;
 
     /**
      * Available options for form fields (dropdowns, checkboxes, radio buttons, etc.)
      *
      * @var array
      */
-    protected $options;
+    protected array $options;
 
     /**
      * Create a new SearchResponse instance
      *
      * @param array $params
-     * @param mixed $results
+     * @param mixed|null $results
      * @param array $options
      */
-    private function __construct(array $params = [], $results = null, array $options = [])
+    private function __construct(array $params = [], mixed $results = null, array $options = [])
     {
         $this->params = $params;
         $this->results = $results;
@@ -53,7 +53,7 @@ class SearchResponse
      */
     public static function generate(
         array $params,
-              $results,
+        mixed $results,
         array $optionFields = []
     ): self
     {
@@ -111,7 +111,7 @@ class SearchResponse
      * @param string $valueKey
      * @return array
      */
-    private static function resolveOptionSource($source, string $labelKey = 'name', string $valueKey = 'id'): array
+    private static function resolveOptionSource(mixed $source, string $labelKey = 'name', string $valueKey = 'id'): array
     {
         if (is_callable($source)) {
             // If source is a callback, call it to get options
@@ -145,10 +145,10 @@ class SearchResponse
      * Get a specific parameter
      *
      * @param string $name
-     * @param mixed $default
+     * @param mixed|null $default
      * @return mixed
      */
-    public function get(string $name, $default = null)
+    public function get(string $name, mixed $default = null): mixed
     {
         return Arr::get($this->params, $name, $default);
     }
@@ -281,16 +281,12 @@ class SearchResponse
      */
     public function __get(string $name)
     {
-        switch ($name) {
-            case 'params':
-                return $this->params;
-            case 'results':
-                return $this->results;
-            case 'options':
-                return $this->options;
-            default:
-                return null;
-        }
+        return match ($name) {
+            'params' => $this->params,
+            'results' => $this->results,
+            'options' => $this->options,
+            default => null,
+        };
     }
 
     /**
